@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import SearchBar from "./SearchBar/SearchBar";
 import axios from "axios";
 import ImageGallery from "./ImageGallery/ImageGallery";
@@ -60,12 +60,14 @@ const App = () => {
         toast.error(error);
       } finally {
         setLoader(false);
+        window.scrollBy({
+          top: 500,
+          behavior: "smooth",
+        });
       }
     }
     fetchImages(query, page);
   }, [query, page]);
-
-  //  totalPages = responce.headers["x-total"] / responce.headers["x-per-page"];
 
   return (
     <>
@@ -77,7 +79,7 @@ const App = () => {
       {imagesData.length > 0 && <ImageGallery imagesData={imagesData} />}
       {loader && (
         <Circles
-          wrapperStyle={{ justifyContent: "center" }}
+          wrapperStyle={{ justifyContent: "center", margin: 20 }}
           height="80"
           width="80"
           color="#000000"
