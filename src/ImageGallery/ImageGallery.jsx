@@ -5,9 +5,9 @@ import css from "./ImageGallery.module.css";
 const ImageGallery = ({ imagesData }) => {
   return (
     <ul className={css.imageList}>
-      {imagesData.map((imagesData) => (
-        <li className={css.imageItem} key={imagesData.id}>
-          <ImageCard imagesData={imagesData} />
+      {imagesData.map((imageData) => (
+        <li className={css.imageItem} key={imageData.id}>
+          <ImageCard imageData={imageData} />
         </li>
       ))}
     </ul>

@@ -1,8 +1,7 @@
-import React from "react";
-
-const LoadMoreButton = ({ page, totalPages, onClick }) => {
+/* eslint-disable react/prop-types */
+const LoadMoreButton = ({ page, onClick }) => {
   const handlerLoadMore = () => {
-    onClick();
+    onClick(page);
   };
   return (
     <button type="button" onClick={handlerLoadMore}>
