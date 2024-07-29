@@ -1,9 +1,12 @@
 /* eslint-disable react/prop-types */
 import css from "./ImageCard.module.css";
 
-const ImageCard = ({ imageData }) => {
+const ImageCard = ({ imageData, onGalleryClick }) => {
+  const ClickHandler = () => {
+    onGalleryClick(imageData.id);
+  };
   return (
-    <div>
+    <div onClick={ClickHandler}>
       <img
         className={css.image}
         src={imageData.urls.small}

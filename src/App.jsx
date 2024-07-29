@@ -7,6 +7,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { Circles } from "react-loader-spinner";
 import LoadMoreButton from "./LoadMoreButton/LoadMoreButton";
 import css from "./App.module.css";
+import ImageModal from "./ImageModal/ImageModal";
 
 const App = () => {
   const [imagesData, setImagesData] = useState([]);
@@ -14,6 +15,7 @@ const App = () => {
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
+  const [modalData, setModalData] = useState("");
 
   const onLoadMore = (page) => {
     const newPage = page + 1;
@@ -29,6 +31,14 @@ const App = () => {
     }
     setQuery(query);
     setImagesData([]);
+  };
+
+  const onGalleryClick = (id) => {
+    const element = imagesData.find((imageData) => imageData.id === id);
+    setModalData(element);
+  };
+  const onGalleryClose = (element) => {
+    setModalData("");
   };
 
   useEffect(() => {
@@ -55,6 +65,7 @@ const App = () => {
         }
         setTotalPage(responce.data.total_pages);
         setImagesData((prevData) => [...prevData, ...responce.data.results]);
+        console.log(responce.data);
       } catch (error) {
         toast.error(error);
       } finally {
@@ -76,9 +87,14 @@ const App = () => {
       <div>
         <Toaster position="top-center" />
       </div>
+      {modalData && (
+        <ImageModal modalData={modalData} onClose={onGalleryClose} />
+      )}
       <SearchBar onClick={onSearch} className={css.body} />
 
-      {imagesData.length > 0 && <ImageGallery imagesData={imagesData} />}
+      {imagesData.length > 0 && (
+        <ImageGallery imagesData={imagesData} onGalleryClick={onGalleryClick} />
+      )}
       {loader && (
         <Circles
           wrapperStyle={{ justifyContent: "center", margin: 20 }}
