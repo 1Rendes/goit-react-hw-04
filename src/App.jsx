@@ -53,21 +53,23 @@ const App = () => {
           setLoader(false);
           return;
         }
-        console.log(responce);
         setTotalPage(responce.data.total_pages);
         setImagesData((prevData) => [...prevData, ...responce.data.results]);
       } catch (error) {
         toast.error(error);
       } finally {
         setLoader(false);
-        window.scrollBy({
-          top: 500,
-          behavior: "smooth",
-        });
       }
     }
     fetchImages(query, page);
   }, [query, page]);
+
+  useEffect(() => {
+    window.scrollBy({
+      top: 500,
+      behavior: "smooth",
+    });
+  }, [imagesData]);
 
   return (
     <>
