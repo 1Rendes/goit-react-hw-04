@@ -16,6 +16,7 @@ const App = () => {
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
   const [modalData, setModalData] = useState("");
+  const [modalIsOpen, setIsOpen] = useState(false);
 
   const onLoadMore = (page) => {
     const newPage = page + 1;
@@ -34,11 +35,14 @@ const App = () => {
   };
 
   const onGalleryClick = (id) => {
+    setIsOpen(true);
     const element = imagesData.find((imageData) => imageData.id === id);
     setModalData(element);
+    console.log(element);
   };
-  const onGalleryClose = (element) => {
+  const onModalClose = () => {
     setModalData("");
+    setIsOpen(false);
   };
 
   useEffect(() => {
@@ -65,7 +69,6 @@ const App = () => {
         }
         setTotalPage(responce.data.total_pages);
         setImagesData((prevData) => [...prevData, ...responce.data.results]);
-        console.log(responce.data);
       } catch (error) {
         toast.error(error);
       } finally {
@@ -87,9 +90,11 @@ const App = () => {
       <div>
         <Toaster position="top-center" />
       </div>
-      {modalData && (
-        <ImageModal modalData={modalData} onClose={onGalleryClose} />
-      )}
+      <ImageModal
+        modalData={modalData}
+        modalIsOpen={modalIsOpen}
+        closeModal={onModalClose}
+      />
       <SearchBar onClick={onSearch} className={css.body} />
 
       {imagesData.length > 0 && (
