@@ -1,13 +1,13 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useRef, useState } from "react";
-import SearchBar from "./SearchBar/SearchBar";
+import SearchBar from "./components/SearchBar/SearchBar";
 import axios from "axios";
-import ImageGallery from "./ImageGallery/ImageGallery";
+import ImageGallery from "./components/ImageGallery/ImageGallery";
 import toast, { Toaster } from "react-hot-toast";
 import { Circles } from "react-loader-spinner";
-import LoadMoreButton from "./LoadMoreButton/LoadMoreButton";
+import LoadMoreButton from "./components/LoadMoreButton/LoadMoreButton";
 import css from "./App.module.css";
-import ImageModal from "./ImageModal/ImageModal";
+import ImageModal from "./components/ImageModal/ImageModal";
 
 const App = () => {
   const [imagesData, setImagesData] = useState([]);
