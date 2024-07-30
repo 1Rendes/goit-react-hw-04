@@ -38,7 +38,6 @@ const App = () => {
     setIsOpen(true);
     const element = imagesData.find((imageData) => imageData.id === id);
     setModalData(element);
-    console.log(element);
   };
   const onModalClose = () => {
     setModalData("");

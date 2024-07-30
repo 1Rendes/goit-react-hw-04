@@ -4,9 +4,15 @@ import css from "./ImageModal.module.css";
 
 const ImageModal = ({ modalData, closeModal, modalIsOpen }) => {
   return (
-    <ReactModal IsOpen={modalIsOpen} onModalClose={closeModal}>
+    <ReactModal
+      overlayClassName={css.backdrop}
+      className={css.modal}
+      isOpen={modalIsOpen}
+      onRequestClose={closeModal}
+      ariaHideApp={false}
+    >
       {modalData && (
-        <div>
+        <>
           <img
             className={css.image}
             src={modalData.urls.regular}
@@ -20,7 +26,7 @@ const ImageModal = ({ modalData, closeModal, modalIsOpen }) => {
               <b>Author:</b> {modalData.user.username}
             </p>
           </div>
-        </div>
+        </>
       )}
     </ReactModal>
   );
